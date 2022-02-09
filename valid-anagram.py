@@ -3,19 +3,19 @@
 import collections
 import unittest
 
-class Solutions:
-    def solution1(s: str, t: str) -> bool:
-        return collections.Counter(s) == collections.Counter(t)
 
-    def solution2(s: str, t: str) -> bool:
-        return sorted(s) == sorted(t) 
+def solution1(s, t):
+    return collections.Counter(s) == collections.Counter(t)
+
+def solution2(s, t):
+    return sorted(s) == sorted(t) 
 
 class Tests(unittest.TestCase):
     cases = [
         {'inp': ["anagram", "nagaram"], 'out': True},
         {'inp': ["rat", "car"], 'out': False},
     ]
-    solutions = [Solutions.solution1, Solutions.solution2]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
