@@ -1,2 +1,5 @@
-# dsa
-Data Structure and Algorithms
+# Data Structure and Algorithms
+
+## How to run
+
+`python $filename.py`
