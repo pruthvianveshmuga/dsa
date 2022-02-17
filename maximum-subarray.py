@@ -33,13 +33,36 @@ def solution3(nums):
         result = max(result, lastSum)
     return result
 
+def leftAndRight(nums, midIndex):
+    right, sum = -math.inf, 0
+    for num in nums[midIndex:]:
+        sum += num
+        right = max(right, sum)
+    left, sum = -math.inf, 0
+    for num in reversed(nums[:midIndex]):
+        sum += num
+        left = max(left, sum)
+    return left + right
+
+# O(nlogn) - divide and conquer
+def solution4(nums):
+    if len(nums) == 1:
+        return nums[0]
+    midIndex = int(len(nums)/2)
+    left = solution4(nums[:midIndex])
+    right = solution4(nums[midIndex:])
+    both = leftAndRight(nums, midIndex)
+    return max(left, right, both)
+    
+
+
 class Tests(unittest.TestCase):
     cases = [
         {'inp': [-2,1,-3,4,-1,2,1,-5,4], 'out': 6},
         {'inp': [1], 'out': 1},
         {'inp': [5,4,-1,7,8], 'out': 23},
     ]
-    solutions = [solution1, solution2, solution3]
+    solutions = [solution1, solution2, solution3, solution4]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
