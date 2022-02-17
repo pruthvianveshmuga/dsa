@@ -16,7 +16,7 @@ def solution1(s):
         tempStr = s[:i] + s[i+1:]
         if isPalindrome(tempStr):
             return True
-    return False
+    return isPalindrome(s)
 
 class Tests(unittest.TestCase):
     cases = [
