@@ -4,7 +4,7 @@ import math
 import sys
 import unittest
 
-# O(n)
+# O(n) - greedy
 def solution1(nums):
     result = -(sys.maxsize - 1)
     sum = 0
@@ -14,7 +14,7 @@ def solution1(nums):
         result = max(result, sum)
     return result
 
-# O(n^2)
+# O(n^2) - brute
 def solution2(nums):
     result = -(sys.maxsize-1)
     for i in range(len(nums)):
@@ -25,6 +25,13 @@ def solution2(nums):
                 result = sum
     return result
 
+# O(n) - dp
+def solution3(nums):
+    result, lastSum = -math.inf, 0
+    for num in nums:
+        lastSum = max(lastSum, 0) + num
+        result = max(result, lastSum)
+    return result
 
 class Tests(unittest.TestCase):
     cases = [
@@ -32,7 +39,7 @@ class Tests(unittest.TestCase):
         {'inp': [1], 'out': 1},
         {'inp': [5,4,-1,7,8], 'out': 23},
     ]
-    solutions = [solution1, solution2]
+    solutions = [solution1, solution2, solution3]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
