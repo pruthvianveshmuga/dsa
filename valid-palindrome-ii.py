@@ -2,11 +2,13 @@
 
 import unittest
 
-def isPalindrome(s):
+def isPalindrome(s, skipsLeft=0):
+    if skipsLeft < 0:
+        return False
     left, right = 0, len(s) - 1
     while left < right:
         if s[left] != s[right]:
-            return False
+            return isPalindrome(s[left+1:right+1], skipsLeft-1) or isPalindrome(s[left:right], skipsLeft-1)
         left, right = left + 1, right - 1
     return True
 
@@ -18,13 +20,18 @@ def solution1(s):
             return True
     return isPalindrome(s)
 
+# O(n) - brute optimized
+def solution2(s):
+    return isPalindrome(s, 1)
+
+
 class Tests(unittest.TestCase):
     cases = [
         {'inp': 'aba', 'out': True},
         {'inp': 'abca', 'out': True},
         {'inp': 'abc', 'out': False},
     ]
-    solutions = [solution1]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
