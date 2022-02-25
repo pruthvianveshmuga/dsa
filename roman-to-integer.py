@@ -2,6 +2,12 @@
 
 import unittest
 
+# reverse - life is short
+def solution3(s):
+    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    return sum([values[s[i]] * (-1 if i < len(s)-1 and values[s[i]] < values[s[i+1]] else 1) for i in reversed(range(len(s)))])
+
+
 def solution2(s):
     values = {'IV': 4, 'IX': 9, 'XL': 40, 'XC': 90, 'CD': 400, 'CM': 900, 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     ans = 0
@@ -28,7 +34,7 @@ class Tests(unittest.TestCase):
         {'inp': 'LVIII', 'out': 58},
         {'inp': 'MCMXCIV', 'out': 1994},
     ]
-    solutions = [solution1, solution2]
+    solutions = [solution1, solution2, solution3]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
