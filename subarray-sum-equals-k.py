@@ -2,6 +2,18 @@
 
 import unittest
 
+# O(n) - using hash map
+def solution2(nums, k):
+    ans = 0
+    sumOccurences = {0: 1}
+    currSum = 0
+    for num in nums:
+        currSum += num
+        ans += sumOccurences[currSum - k] if (currSum - k) in sumOccurences else 0
+        sumOccurences[currSum] = (sumOccurences[currSum] if currSum in sumOccurences else 0) + 1
+    return ans
+
+
 # O(n^2) - optimized brute - TLE
 def solution1(nums, k):
     acc = [0]
@@ -20,7 +32,7 @@ class Tests(unittest.TestCase):
         {'inp': [[1,2,3], 3], 'out': 2},
         {'inp': [[1], 0], 'out': 0},
     ]
-    solutions = [solution1]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
