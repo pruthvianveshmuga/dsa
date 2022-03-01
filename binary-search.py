@@ -2,6 +2,19 @@
 
 import unittest
 
+# Without Recursion
+def solution2(nums, target):
+    start, end = 0, len(nums)
+    while(start < end):
+        mid = (start + end)//2
+        if nums[mid] == target:
+            return mid
+        elif target < nums[mid]:
+            end = mid
+        else:
+            start = mid+1
+    return -1
+
 # Recursion
 def binarySearch(nums, target, start, end):
     if start >= end:
@@ -22,7 +35,9 @@ class Tests(unittest.TestCase):
         {'inp': [[-1,0,3,5,9,12], 9], 'out': 4},
         {'inp': [[-1,0,3,5,9,12], 2], 'out': -1},
     ]
-    solutions = [solution1]
+
+    solutions = [solution1, solution2]
+
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
