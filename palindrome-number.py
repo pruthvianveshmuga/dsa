@@ -2,6 +2,11 @@
 
 import unittest
 
+# Life is short
+def solution2(x):
+    return str(x) == str(x)[::-1]
+
+
 # O(1) time, O(1) space
 def solution1(x):
     inp = str(x)
