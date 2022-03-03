@@ -1,6 +1,37 @@
 # https://leetcode.com/problems/3sum/
 
+from typing import List
 import unittest
+
+def twoSum(arr, reqSum, ans: List):
+    left, right = 0, len(arr)-1
+    while(left < right):
+        sum = arr[left] + arr[right]
+        if sum < reqSum or (left > 0 and arr[left] == arr[left-1]):
+            left += 1
+        elif sum > reqSum or (right < len(arr)-1 and arr[right] == arr[right+1]):
+            right -= 1
+        else:
+            ans.append([-reqSum, arr[left], arr[right]])
+            left += 1
+            right -= 1
+    return
+
+
+# O(n^2) - two pointer
+def solution3(nums):
+    nums.sort()
+    n = len(nums)
+    ans = []
+    for i in range(n):
+        if nums[i] > 0:
+            break
+        elif i > 0 and nums[i] == nums[i-1]:
+            continue
+        else:
+            twoSum(nums[i+1:], -nums[i], ans)
+    return ans
+
 
 # O(n^2) - hashing
 def solution2(nums):
@@ -31,7 +62,7 @@ class Tests(unittest.TestCase):
         {'inp': [], 'out': []},
         {'inp': [0], 'out': []},
     ]
-    solutions = [solution1,solution2]
+    solutions = [solution1, solution2, solution3]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
