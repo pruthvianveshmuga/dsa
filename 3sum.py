@@ -3,7 +3,32 @@
 from typing import List
 import unittest
 
-def twoSum(arr, reqSum, ans: List):
+def twoSumHash(arr, reqSum, ans: List):
+    numToInd = { num:i for i, num in enumerate(arr)}
+    for i, el in enumerate(arr):
+        if i > 0 and arr[i] == arr[i-1]:
+            continue
+        val = reqSum - el
+        if val in numToInd and i < numToInd[val]:
+            ans.append([-reqSum, el, val])
+    return
+
+# O(n^2) - hashing without set
+def solution4(nums):
+    nums.sort()
+    n = len(nums)
+    ans = []
+    
+    for i in range(n):
+        if nums[i] > 0:
+            break
+        elif i > 0 and nums[i] == nums[i-1]:
+            continue
+        else:
+            twoSumHash(nums[i+1:], -nums[i], ans)
+    return ans
+
+def twoSum2Pointer(arr, reqSum, ans: List):
     left, right = 0, len(arr)-1
     while(left < right):
         sum = arr[left] + arr[right]
@@ -18,7 +43,7 @@ def twoSum(arr, reqSum, ans: List):
     return
 
 
-# O(n^2) - two pointer
+# O(n^2) - two pointer without using set
 def solution3(nums):
     nums.sort()
     n = len(nums)
@@ -29,11 +54,11 @@ def solution3(nums):
         elif i > 0 and nums[i] == nums[i-1]:
             continue
         else:
-            twoSum(nums[i+1:], -nums[i], ans)
+            twoSum2Pointer(nums[i+1:], -nums[i], ans)
     return ans
 
 
-# O(n^2) - hashing
+# O(n^2) - hashing with set
 def solution2(nums):
     n = len(nums)
     ans_set = set()
@@ -59,11 +84,13 @@ def solution1(nums):
 # Note: Tests might fail as the order of list elements might not match. Need a testing func.
 class Tests(unittest.TestCase):
     cases = [
-        {'inp': [-1,0,1,2,-1,-4], 'out': [[-1,0,1],[-1,-1,2]]},
+        # {'inp': [-1,0,1,2,-1,-4], 'out': [[-1,0,1],[-1,-1,2]]},
+        {'inp': [0,0,0,0], 'out': [[0,0,0]]},
         {'inp': [], 'out': []},
         {'inp': [0], 'out': []},
     ]
-    solutions = [solution1, solution2, solution3]
+    # solutions = [solution1, solution2, solution3]
+    solutions = [solution4]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
