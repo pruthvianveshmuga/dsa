@@ -56,6 +56,7 @@ def solution1(nums):
                     ans_set.add(tuple(sorted((nums[i], nums[j], nums[k]))))
     return [list(x) for x in ans_set]
 
+# Note: Tests might fail as the order of list elements might not match. Need a testing func.
 class Tests(unittest.TestCase):
     cases = [
         {'inp': [-1,0,1,2,-1,-4], 'out': [[-1,0,1],[-1,-1,2]]},
