@@ -2,6 +2,10 @@
 
 import unittest
 
+# sets - O(n) - Life is short
+def solution2(nums):
+    return len(set(nums)) != len(nums)
+
 # sorting - O(nlogn)
 def solution1(nums):
     sorted = nums[:]
@@ -18,7 +22,7 @@ class Tests(unittest.TestCase):
         {'inp': [1,2,3,4], 'out': False},
         {'inp': [1,1,1,3,3,4,3,2,4,2], 'out': True},
     ]
-    solutions = [solution1]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
