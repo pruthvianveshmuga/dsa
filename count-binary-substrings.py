@@ -15,6 +15,7 @@ def solution2(s):
         ans += min(prev, curr)
     return ans
 
+
 # O(n) - grouping
 def solution1(s):
     groups = [1]
