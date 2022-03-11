@@ -2,6 +2,15 @@
 
 import unittest
 
+def solution2(s):
+    values = {'IV': 4, 'IX': 9, 'XL': 40, 'XC': 90, 'CD': 400, 'CM': 900, 'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    ans = 0
+    while s:
+        item = [k for k in values.keys() if s.startswith(k)][0]
+        ans += values[item]
+        s = s[len(item):]
+    return ans
+
 # O(1) - First run
 def solution1(s):
     def isNegative(s):
@@ -19,7 +28,7 @@ class Tests(unittest.TestCase):
         {'inp': 'LVIII', 'out': 58},
         {'inp': 'MCMXCIV', 'out': 1994},
     ]
-    solutions = [solution1]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
