@@ -1,5 +1,4 @@
 # https://leetcode.com/problems/number-of-islands/
-
 from collections import deque
 import unittest
 
@@ -25,7 +24,6 @@ def solution2(grid):
                 islands += 1
                 bfs(grid, row, col)
     return islands
-
 
 def dfs(grid, visited, row, col):
     if (not 0 <= row < len(grid)) or (not 0 <= col < len(grid[row])) or grid[row][col] != '1' or visited[row][col]:
