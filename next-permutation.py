@@ -33,7 +33,6 @@ def solution1(nums):
     return nums
 
 class Tests(unittest.TestCase):
-    
     solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
