@@ -45,6 +45,7 @@ def solution2(nums):
                 ans_set.add(tuple(sorted((nums[i], nums[j], val))))
     return [list(x) for x in ans_set]
 
+
 # O(n^3) - brute - TLE
 def solution1(nums):
     n = len(nums)
@@ -55,6 +56,7 @@ def solution1(nums):
                 if nums[i] + nums[j] + nums[k] == 0:
                     ans_set.add(tuple(sorted((nums[i], nums[j], nums[k]))))
     return [list(x) for x in ans_set]
+
 
 # Note: Tests might fail as the order of list elements might not match. Need a testing func.
 class Tests(unittest.TestCase):
