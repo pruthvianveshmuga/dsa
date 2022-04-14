@@ -14,6 +14,7 @@ def solution2(nums):
                 ans_set.add(tuple(sorted((nums[i], nums[j], val))))
     return [list(x) for x in ans_set]
 
+
 # O(n^3) - brute - TLE
 def solution1(nums):
     n = len(nums)
