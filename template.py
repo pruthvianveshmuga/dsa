@@ -3,7 +3,7 @@
 import unittest
 
 def solution1(inp):
-        return ''
+    return ''
 
 class Tests(unittest.TestCase):
     cases = [
