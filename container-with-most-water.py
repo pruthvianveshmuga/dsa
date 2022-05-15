@@ -13,12 +13,28 @@ def solution1(height):
 			maxWater = max(maxWater, water)
 	return maxWater
 
+# greedy - O(n)
+def solution2(height):
+	def calc(i, j, height):
+		return (j-i) * min(height[i], height[j])
+	maxWater = 0
+	i, j = 0, len(height) - 1
+	while i < j:
+		maxWater = max(maxWater, calc(i, j, height))
+		if height[i] < height[j]:
+			i += 1
+		else:
+			j -= 1
+	return maxWater
+		
+
 class Tests(unittest.TestCase):
 	cases = [
 		{'inp': [1,8,6,2,5,4,8,3,7], 'out': 49},
-		{'inp': [1,1], 'out': 1}
+		{'inp': [1,1], 'out': 1},
+		{'inp': [1,3,2,5,25,24,5], 'out': 24}
 	]
-	solutions = [solution1]
+	solutions = [solution1, solution2]
 	def test(self):
 		for sol in self.solutions:
 			for case in self.cases:
