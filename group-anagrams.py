@@ -22,7 +22,7 @@ def solution2(strs):
         hashMap[tuple(count)].append(str)
     return hashMap.values()
 
-
+# Tests may break as the order might differ. Not a concern.
 class Tests(unittest.TestCase):
     cases = [
         {'inp': ["eat","tea","tan","ate","nat","bat"], 'out': [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]},
