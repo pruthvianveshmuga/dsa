@@ -24,7 +24,7 @@ def solution1(word, abbr):
     if i_word != len(word):
         return False
     return True
-Z
+
 
 class Tests(unittest.TestCase):
     cases = [
