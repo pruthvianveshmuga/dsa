@@ -2,6 +2,7 @@
 
 import collections
 import unittest
+
 # sorted str as key
 def solution1(strs):
     hashMap = {}
