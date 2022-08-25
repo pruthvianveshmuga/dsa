@@ -1,7 +1,9 @@
 # https://leetcode.com/problems/group-anagrams/
 
+import collections
 import unittest
 
+# sorted str as key
 def solution1(strs):
     hashMap = {}
     for str in strs:
@@ -9,16 +11,25 @@ def solution1(strs):
         if key not in hashMap.keys():
             hashMap[key] = []
         hashMap[key].append(str)
-    print(list(hashMap.values()))
-    return list(hashMap.values())
+    return hashMap.values()
 
+# char count as key
+def solution2(strs):
+    hashMap = collections.defaultdict(list)
+    for str in strs:
+        count = [0] * 26
+        for c in str:
+            count[ord(c)-ord('a')] += 1
+        hashMap[tuple(count)].append(str)
+    return hashMap.values()
 
+# Tests may break as the order might differ. Not a concern.
 class Tests(unittest.TestCase):
     cases = [
         {'inp': ["eat","tea","tan","ate","nat","bat"], 'out': [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]},
         {'inp': [""], 'out': [[""]]},
     ]
-    solutions = [solution1]
+    solutions = [solution1, solution2]
     def test(self):
         for sol in self.solutions:
             for case in self.cases:
